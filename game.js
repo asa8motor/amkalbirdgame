@@ -310,6 +310,20 @@ SFX.score.src = "sfx/score.wav";
 SFX.hit.src = "sfx/hit.wav";
 SFX.die.src = "sfx/die.wav";
 
+function resizeCanvas() {
+  scrn.width = window.innerWidth;
+  scrn.height = window.innerHeight;
+
+  const scaleX = scrn.width / 276;
+  const scaleY = scrn.height / 414;
+  
+
+  sctx.scale(scaleX, scaleY);
+}
+
+window.addEventListener('load', resizeCanvas);
+window.addEventListener('resize', resizeCanvas);
+
 function gameLoop() {
   update();
   draw();
