@@ -1,5 +1,11 @@
 const RAD = Math.PI / 180;
 const scrn = document.getElementById("canvas");
+
+// the size fix 1
+scrn.width = Math.min(450, window.innerWidth);
+scrn.height = Math.min(925, window.innerHeight);
+
+
 const sctx = scrn.getContext("2d");
 scrn.tabIndex = 1;
 scrn.addEventListener("click", () => {
@@ -72,7 +78,7 @@ const gnd = {
   update: function () {
     if (state.curr != state.Play) return;
     this.x -= dx;
-    this.x = this.x % (this.sprite.width / 2);
+    this.x = this.x % (this.sprite.width / 4);
   },
 };
 const bg = {
@@ -106,7 +112,9 @@ const pipe = {
     if (frames % 100 == 0) {
       this.pipes.push({
         x: parseFloat(scrn.width),
-        y: -210 * Math.min(Math.random() + 1, 1.8),
+        // original bottom pipe bottom : y: -210 * Math.min(Math.random() + 1, 1.8),
+        // changing the lower border of bottom pipes
+        y: -40 * Math.min(Math.random() + 1, 1.8),
       });
     }
     this.pipes.forEach((pipe) => {
@@ -128,7 +136,9 @@ const bird = {
   ],
   rotatation: 0,
   x: 50,
-  y: 100,
+  // original bird y position fix : y: 100
+  // bird y position fix
+  y: parseFloat(scrn.height) / 2.25,
   speed: 0,
   gravity: 0.125,
   thrust: 3.6,
@@ -293,7 +303,7 @@ const UI = {
 };
 
 gnd.sprite.src = "img/ground.png";
-bg.sprite.src = "img/BG.png";
+bg.sprite.src = "img/BG1.png";
 pipe.top.sprite.src = "img/toppipe.png";
 pipe.bot.sprite.src = "img/botpipe.png";
 UI.gameOver.sprite.src = "img/go.png";
@@ -309,20 +319,6 @@ SFX.flap.src = "sfx/flap.wav";
 SFX.score.src = "sfx/score.wav";
 SFX.hit.src = "sfx/hit.wav";
 SFX.die.src = "sfx/die.wav";
-
-function resizeCanvas() {
-  scrn.width = window.innerWidth;
-  scrn.height = window.innerHeight;
-
-  const scaleX = scrn.width / 276;
-  const scaleY = scrn.height / 414;
-  
-
-  sctx.scale(scaleX, scaleY);
-}
-
-window.addEventListener('load', resizeCanvas);
-window.addEventListener('resize', resizeCanvas);
 
 function gameLoop() {
   update();

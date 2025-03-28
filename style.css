@@ -1,14 +1,22 @@
-html, body {
+#canvas
+{
+    background-color:#30c0df;
+    /*border: 2px solid black;*/
+    display: block;
     margin: 0;
     padding: 0;
-    overflow: hidden;
-    width: 100%;
-    height: 100%;
+    max-width: 450px;
+    max-height: 1000px;
+
+    
 }
 
-#canvas {
-    background-color: #30c0df;
-    display: block;
-    width: 100%;
-    height: 100%;
+
+/*
+the size fix
+*/
+html, body {
+    max-width: 450px;
+    margin: 0 !important;
+    padding: 0 !important;
 }
